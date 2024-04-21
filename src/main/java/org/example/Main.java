@@ -24,9 +24,8 @@ public class Main {
             StudentUtil.registerStudents();
         }else if (menu==2){
             StudentUtil.printAllRegisteredStudent();
-
         } else if (menu==3) {
-
+            StudentUtil.findStudentsAndPrint();
             }
         }
 
