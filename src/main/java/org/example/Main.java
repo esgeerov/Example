@@ -3,6 +3,7 @@ package org.example;
 import beans.Student;
 import jdk.jshell.execution.Util;
 import util.InputUtil;
+import util.MenuUtil;
 import util.StudentUtil;
 
 import java.sql.Connection;
@@ -15,20 +16,17 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        int menu=InputUtil.requireNumber("What do you want to do? "
-                +"\n1 Register Student"
-                +"\n2 Show all student"
-                +"\n3 Find student"
-                +"\n4 Update student");
-        if(menu==1) {
-            StudentUtil.registerStudents();
-        }else if (menu==2){
-            StudentUtil.printAllRegisteredStudent();
-        } else if (menu==3) {
-            StudentUtil.findStudentsAndPrint();
-            }
+        int menu = 0;
+        while (true) {
+          menu= InputUtil.requireNumber("What do you want to do? "
+                    + "\n1 Register Student"
+                    + "\n2 Show all student"
+                    + "\n3 Find student"
+                    + "\n4 Update student"
+                    +"\n5 Exit");
+            MenuUtil.processMenu(menu);
         }
 
-
+    }
     }
 

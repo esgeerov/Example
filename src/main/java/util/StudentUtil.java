@@ -5,10 +5,10 @@ import org.example.Config;
 
 public class StudentUtil {
     public static Student fillStudent() {
-        String name = InputUtil.requireText("Enter name");
-        String surname = InputUtil.requireText("Enter surname");
-        String className = InputUtil.requireText("Enter class");
-        int age = InputUtil.requireNumber("Enter age");
+        String name = MenuUtil.requireName();
+        String surname = MenuUtil.requireSurname();
+        String className =MenuUtil.requireClassName();
+        int age = MenuUtil.requireAge();
 
         Student student = new Student(name, surname, age, className);
         return student;
@@ -20,7 +20,7 @@ public class StudentUtil {
         }
         for (int i = 0; i < Config.students.length; i++) {
             Student student = Config.students[i];
-            System.out.println(student.getFullInfo());
+            System.out.println((i + 1) + " " + student.getFullInfo());
         }
     }
 
@@ -38,28 +38,36 @@ public class StudentUtil {
 
     public static void findStudentsAndPrint() {
         String text = InputUtil.requireText("Type name,surname or classname");
-        Student[] result=findStudents(text);
-        for (int i=0;i<Config.students.length;i++){
+        Student[] result = findStudents(text);
+        for (int i = 0; i < Config.students.length; i++) {
             System.out.println(result[i].getFullInfo());
         }
     }
-    public static Student[] findStudents(String text){
-        int count=0;
+
+    public static Student[] findStudents(String text) {
+        int count = 0;
         for (int i = 0; i < Config.students.length; i++) {
             Student student = Config.students[i];
             if (student.getName().contains(text) || student.getSurname().contains(text) || student.getClassName().contains(text)) {
                 count++;
             }
         }
-        Student[] result=new Student[count];
-        int found=0;
+        Student[] result = new Student[count];
+        int found = 0;
         for (int i = 0; i < Config.students.length; i++) {
             Student student = Config.students[i];
             if (student.getName().contains(text) || student.getSurname().contains(text) || student.getClassName().contains(text)) {
-                result[found++]=student;
+                result[found++] = student;
             }
         }
         return result;
 
+    }
+
+    public static void updateStudent() {
+        StudentUtil.printAllRegisteredStudent();
+        int i = InputUtil.requireNumber("Which number?");
+        Student student = StudentUtil.fillStudent();
+        Config.students[i - 1] = student;
     }
 }
